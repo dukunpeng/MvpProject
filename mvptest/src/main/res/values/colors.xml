@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--基础颜色管理start-->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <!--基础颜色管理end-->
+
+    <!--主题颜色管理start-->
+    <color name="red_theme_color">#FFEC4837</color>
+    <color name="red_theme_dark_color">#FFDC4837</color>
+    <color name="blue_theme_color">#FF4187CD</color>
+    <!--主题颜色管理end-->
+
+    <!--页面背景颜色管理start-->
+    <color name="toolbar_red_bg_color">#FFEC4837</color>
+    <color name="toolbar_white_bg_color">#FFFFFFFF</color>
+    <!--页面背景颜色管理end-->
+
+    <!--文字颜色管理start-->
+    <color name="blue_theme_text_color">#FF4187CD</color>
+    <color name="red_theme_text_color">#FFEC4837</color>
+    <color name="important_text_color">#506473</color>
+    <!--文字颜色管理end-->
+
+    <!--按钮颜色管理start-->
+    <color name="tv_btn_gray_color">#FFE0E0E0</color>
+    <color name="tv_btn_red_color">#FFEC4837</color>
+    <color name="tv_btn_red_press_color">#FFDC4837</color>
+    <!--按钮颜色管理end-->
+
+
+</resources>

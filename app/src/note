@@ -1,0 +1,36 @@
+BaseActivity{
+1.初始化View
+2.回退
+3.设置导航栏（以及变化导航栏）
+4.沉浸式
+5.重写返回按钮的操作
+6.startActivity+startActivityForResult
+7.ontuch ondeyouch
+8.initViews
+9.setListener
+
+}
+abstract class BasePresenter{
+getData(带参数);
+getData1(带参数){
+};
+getData2带参数){
+};
+}
+interface IBaseModel{
+
+
+}
+abstract BaseModel<T>{
+
+
+}
+BaseView{
+
+void beforeLoadShowing();
+void showLoading();
+void hideLoading();
+void showError();
+void showData(Object data);
+Context getContext();
+}

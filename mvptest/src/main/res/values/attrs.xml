@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoadingAbleLayout">            // 声名属性集的名称，即这些属性是属于哪个控件的。
+        <attr name="loading_animation" format="reference"/>   // 声名属性 loading_animation 格式为 reference 类型
+        <attr name="text_size" format="dimension"/>   // 声名属性 text_size 格式为 dimension 类型
+        <attr name="animationView_backgroundResource" format="reference"/>   // 声名属性 animationView_backgroundResource 格式为 reference 类型
+    </declare-styleable>
+
+</resources>
