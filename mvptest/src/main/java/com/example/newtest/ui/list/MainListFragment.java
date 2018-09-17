@@ -59,27 +59,8 @@ public class MainListFragment extends MvpBaseFragment<MainListPresenterImp> impl
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void showLoading() {
 
-        SingleLoadingDialog.getInstance().showLoading();
-    }
 
-    @Override
-    public void hideLoading() {
-
-        SingleLoadingDialog.getInstance().hideLoad();
-    }
-
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void showData(Object data) {
-
-    }
 
     @Override
     public void showList(List<UserData> list) {

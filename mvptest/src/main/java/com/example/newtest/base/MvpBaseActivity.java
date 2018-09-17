@@ -23,6 +23,7 @@ import com.example.newtest.common.ToolbarBgColor;
 import com.example.newtest.kit.Kits;
 import com.example.newtest.log.XLog;
 import com.example.newtest.request.OkHttpClientManager;
+import com.example.newtest.window.SingleLoadingDialog;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -72,6 +73,20 @@ public abstract class MvpBaseActivity<P extends BasePresenter> extends BaseActiv
         Class <P> entityClass = (Class <P>) pt.getActualTypeArguments()[0];
 
         return Kits.Reflect.createInstance(entityClass);
+    }
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showLoading() {
+        SingleLoadingDialog.getInstance().showLoading();
+    }
+
+    @Override
+    public void hideLoading() {
+        SingleLoadingDialog.getInstance().hideLoad();
     }
 
     @Override
