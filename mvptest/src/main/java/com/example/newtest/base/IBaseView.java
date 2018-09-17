@@ -13,7 +13,6 @@ public interface IBaseView {
     void showLoading();
     void hideLoading();
     void showError();
-    void showData(Object data);
 
 
 }

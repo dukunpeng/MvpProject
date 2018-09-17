@@ -51,7 +51,7 @@ public class SingleLoadingDialog extends Dialog implements ILoading
         if (instance==null){
             synchronized (SingleLoadingDialog.class){
                 if (instance==null){
-                    instance = new SingleLoadingDialog(MyApplication.getInstance().getApplicationContext(), R.style.dialog_fullscreen_tran);
+                    instance = new SingleLoadingDialog(MyApplication.getInstance().getCurrentActivity(), R.style.dialog_fullscreen_tran);
                     instance.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
                     instance.setContentView(LayoutInflater.from(MyApplication.getInstance().getApplicationContext()).inflate(R.layout.window_loading_dialog,null));
                     instance.setCancelable(true);

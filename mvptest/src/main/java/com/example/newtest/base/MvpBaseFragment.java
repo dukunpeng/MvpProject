@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.newtest.kit.Kits;
 import com.example.newtest.log.XLog;
+import com.example.newtest.window.SingleLoadingDialog;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -51,6 +52,21 @@ public abstract class MvpBaseFragment<P extends BasePresenter>  extends BaseFrag
     P createNewPresenter() {
         Class <P> entityClass = (Class <P>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         return Kits.Reflect.createInstance(entityClass);
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showLoading() {
+        SingleLoadingDialog.getInstance().showLoading();
+    }
+
+    @Override
+    public void hideLoading() {
+        SingleLoadingDialog.getInstance().hideLoad();
     }
 
     @Override
