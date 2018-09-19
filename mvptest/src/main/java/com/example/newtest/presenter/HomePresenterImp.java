@@ -15,7 +15,9 @@ public class HomePresenterImp extends BasePresenter<HomeModelImp,HomeContract.Vi
     }
 
     @Override
-    public void showText() {
-
+    public void getList() {
+        view.showList(module.getList());
     }
+
+
 }

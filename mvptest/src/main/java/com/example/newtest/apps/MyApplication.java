@@ -5,6 +5,10 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.newtest.log.LogUtils;
+
+import java.lang.ref.WeakReference;
+
 /**
  * @author Mark
  * @create 2018/9/13
@@ -30,38 +34,47 @@ public class MyApplication extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 app_activity = activity;
-                Log.e("onActivityCreated===", app_activity + "");
+                LogUtils.e("onActivityCreated===", "activity=="+activity.getClass().getSimpleName());
+                LogUtils.e("onActivityCreated===",  "app_activity=="+app_activity.getClass().getSimpleName());
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-                app_activity = activity;
-                Log.e("onActivityDestroyed===", app_activity + "");
+            //    app_activity = activity;
+                Log.e("onActivityDestroyed===",  "activity=="+activity.getClass().getSimpleName());
+                Log.e("onActivityDestroyed===",  "app_activity=="+app_activity.getClass().getSimpleName());
+
             }
 
             /** Unused implementation **/
             @Override
             public void onActivityStarted(Activity activity) {
                 app_activity = activity;
-                Log.e("onActivityStarted===", app_activity + "");
+                LogUtils.e("onActivityStarted===",  "activity=="+activity.getClass().getSimpleName());
+                LogUtils.e("onActivityStarted===",  "app_activity=="+app_activity.getClass().getSimpleName());
+
             }
+
 
             @Override
             public void onActivityResumed(Activity activity) {
                 app_activity = activity;
-                Log.e("onActivityResumed===", app_activity + "");
+                LogUtils.e("onActivityResumed===", "activity" + "activity=="+activity.getClass().getSimpleName());
+                LogUtils.e("onActivityResumed===",  "app_activity=="+app_activity.getClass().getSimpleName());
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
-                app_activity = activity;
-                Log.e("onActivityPaused===", app_activity + "");
+              //  app_activity = activity;
+                LogUtils.e("onActivityPaused===", "activity" + "activity=="+activity.getClass().getSimpleName());
+                LogUtils.e("onActivityPaused===", "app_activity=="+app_activity.getClass().getSimpleName());
             }
 
             @Override
             public void onActivityStopped(Activity activity) {
-                app_activity = activity;
-                Log.e("onActivityStopped===", app_activity + "");
+              //  app_activity = activity;
+                LogUtils.e("onActivityStopped===",  "activity=="+activity.getClass().getSimpleName());
+                LogUtils.e("onActivityStopped===",   "app_activity=="+app_activity.getClass().getSimpleName());
             }
 
             @Override
@@ -75,6 +88,7 @@ public class MyApplication extends Application {
      * 公开方法，外部可通过 MyApplication.getInstance().getCurrentActivity() 获取到当前最上层的activity
      */
     public Activity getCurrentActivity() {
+        LogUtils.e("onActivity","getCurrentActivity=="+app_activity.getClass().getSimpleName());
         return app_activity;
     }
 

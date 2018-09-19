@@ -22,8 +22,10 @@ public class MainListPresenterImp extends BasePresenter<MainListModelImp,MainLis
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                view.hideLoading();
-                view.showList( module.getList());
+                if (view!=null){
+                    view.hideLoading();
+                    view.showList( module.getList());
+                }
             }
         },3000);
 

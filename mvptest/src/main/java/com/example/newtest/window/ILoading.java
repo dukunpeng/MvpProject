@@ -12,9 +12,4 @@ public interface ILoading {
 
    void hideLoad();
 
-   void pause();
-
-    void startLoad();
-
-    void finishLoad();
 }

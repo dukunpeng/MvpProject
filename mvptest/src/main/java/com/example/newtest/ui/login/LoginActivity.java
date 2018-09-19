@@ -11,6 +11,8 @@ import com.example.newtest.common.APPClientParam;
 import com.example.newtest.contract.LoginContract;
 import com.example.newtest.kit.Codec;
 import com.example.newtest.presenter.LoginPresenterImp;
+import com.example.newtest.router.Router;
+import com.example.newtest.ui.MainActivity;
 import com.example.newtest.wedigt.LoadingAbleLayout;
 import com.google.gson.Gson;
 
@@ -69,13 +71,18 @@ public class LoginActivity extends MvpBaseActivity<LoginPresenterImp> implements
                 setRquestCanCanceledOnDestroy();
                 presenter.getUserInfo(apm);*/
                 loadingAbleLayout.onLoading();
+                showLoading();
+
+                loadData();
             }
         });
         tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadingAbleLayout.onLoadingComplete();
+                hideLoading();
                 canceledRequests();
+                Router.newIntent(LoginActivity.this).to(MainActivity.class).launch();
             }
         });
 
@@ -97,16 +104,6 @@ public class LoginActivity extends MvpBaseActivity<LoginPresenterImp> implements
     }
 
 
-    @Override
-    public void showLoading() {
-
-        tvTest1.setBackgroundColor(Color.BLACK);
-    }
-
-    @Override
-    public void hideLoading() {
-        tvTest1.setBackgroundColor(Color.GREEN);
-    }
 
     @Override
     public void showError() {

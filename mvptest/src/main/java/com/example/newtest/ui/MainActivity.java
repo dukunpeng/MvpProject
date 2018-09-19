@@ -21,25 +21,7 @@ import com.example.newtest.wedigt.NavigationTabView;
 public class MainActivity extends MvpBaseActivity<MainActivityPresenterImp> implements MainActivityContract.View {
     private NavigationTabView navigationTabView;
 
-    @Override
-    public void showLoading() {
 
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void showData(Object data) {
-
-    }
 
     /**
      * 设置页面资源
@@ -89,9 +71,7 @@ public class MainActivity extends MvpBaseActivity<MainActivityPresenterImp> impl
                             .setDotViewShow(false)
                             .selected(false)
                             .setDescription("我的")
-                            .setDrawableSelectorRes(R.drawable.home_menu_selector))
-            ;
-            navigationTabView.postDelayed(new Runnable() {
+                            .setDrawableSelectorRes(R.drawable.home_menu_selector)) .postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     navigationTabView.showFragment(0);

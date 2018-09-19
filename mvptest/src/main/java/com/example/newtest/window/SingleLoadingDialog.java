@@ -1,22 +1,22 @@
 package com.example.newtest.window;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.newtest.R;
 import com.example.newtest.apps.MyApplication;
 
-import java.util.logging.Handler;
-
 /**
+ *
  * @author Mark
  * @create 2018/9/14
  * @Describe
@@ -25,11 +25,7 @@ import java.util.logging.Handler;
 public class SingleLoadingDialog extends Dialog implements ILoading
 {
 
-
     private volatile static SingleLoadingDialog instance;
-
-    private static View contentView;
-    private boolean isDialogLoading;
 
     private AppCompatTextView textView;
     private AppCompatImageView imageView;
@@ -47,26 +43,35 @@ public class SingleLoadingDialog extends Dialog implements ILoading
         super(context, themeResId);
     }
 
+    /**
+     * 因为要兼容老版本手机，目前只做到Activity内的单例
+     * @return
+     */
     public static SingleLoadingDialog getInstance() {
         if (instance==null){
             synchronized (SingleLoadingDialog.class){
                 if (instance==null){
-                    instance = new SingleLoadingDialog(MyApplication.getInstance().getCurrentActivity(), R.style.dialog_fullscreen_tran);
-                    instance.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
-                    instance.setContentView(LayoutInflater.from(MyApplication.getInstance().getApplicationContext()).inflate(R.layout.window_loading_dialog,null));
-                    instance.setCancelable(true);
-                    instance.setCanceledOnTouchOutside(false);
+                    CreateDialog.invoke();
+                }else{
+                    if (!MyApplication.getInstance().getCurrentActivity().equals(instance.getImageView().getTag())){
+                        instance.dismiss();
+                        CreateDialog.invoke();
+                    }
                 }
+            }
+        }else{
+            if (!MyApplication.getInstance().getCurrentActivity().equals(instance.getImageView().getTag())){
+                instance.dismiss();
+                CreateDialog.invoke();
             }
         }
         instance.refreshLoadingState();
         return instance;
     }
+
     void refreshLoadingState(){
-        if (!isDialogLoading){
             //TODO 动画复位
             getImageView().clearAnimation();
-        }
     }
 
     public AppCompatTextView getTextView() {
@@ -85,33 +90,51 @@ public class SingleLoadingDialog extends Dialog implements ILoading
 
     @Override
     public void showLoading() {
-                show();
-                startLoad();
+        if (getContext()!=null){
+            show();
+            startLoad();
+        }
 
     }
 
     @Override
     public void hideLoad() {
-
-        finishLoad();
+        stopLoad();
         dismiss();
     }
 
-    @Override
-    public void pause() {
 
-
-    }
-
-    @Override
-    public void startLoad() {
+    protected void startLoad() {
 
         getImageView().startAnimation(getAnimation());
     }
 
-    @Override
-    public void finishLoad() {
+    protected void stopLoad() {
 
         getImageView().clearAnimation();
+    }
+
+    private static class CreateDialog {
+        private static void invoke() {
+            instance = new SingleLoadingDialog(MyApplication.getInstance().getCurrentActivity(), R.style.dialog_fullscreen_tran);
+            // instance.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+            instance.setContentView(LayoutInflater.from(MyApplication.getInstance().getApplicationContext()).inflate(R.layout.window_loading_dialog,null));
+            instance.getImageView().setTag(MyApplication.getInstance().getCurrentActivity());
+            instance.getTextView();
+            instance.setCancelable(true);
+            instance.setCanceledOnTouchOutside(false);
+
+            /*instance.setOnKeyListener(new OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    switch (keyCode){
+                        case KeyEvent.KEYCODE_BACK:
+                            instance.dismiss();
+                            return true;
+                    }
+                    return false;
+                }
+            });*/
+        }
     }
 }
