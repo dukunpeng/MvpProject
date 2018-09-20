@@ -1,37 +1,28 @@
 package com.example.newtest.ui.home;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.newtest.R;
-import com.example.newtest.base.BaseFragment;
+import com.example.newtest.adapter.base.BaseRecycleAdapter;
 import com.example.newtest.base.MvpBaseFragment;
+import com.example.newtest.contract.HomeContract;
+import com.example.newtest.presenter.HomePresenterImp;
+import com.example.newtest.router.Router;
+import com.example.newtest.ui.test.ActivityOne;
+import com.example.newtest.ui.test.ActivityTwo;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Mark on 2018/7/13.
  */
 
-public class HomeFragment extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home,null);
-        TextView textView =  view.findViewById(R.id.text);
-        textView.setText(""+System.currentTimeMillis());
-        return view;
-    }
-    /* *//**
-     * 设置页面资源
-     *
-     * @return 资源ID
-     *//*
+public class HomeFragment extends MvpBaseFragment<HomePresenterImp> implements HomeContract.View {
+    private RecyclerView recyclerView;
+
+
+    private BaseRecycleAdapter adapter;
     @Override
     public int getContentLayoutResourceId() {
         return R.layout.fragment_home;
@@ -40,12 +31,43 @@ public class HomeFragment extends Fragment {
     @Override
     public void loadData() {
 
+        presenter.requestBanner();
+        presenter.getList();
     }
 
-    @Override*/
-/*    public void initViews() {
+    @Override
+    public void initViews() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-     TextView textView =  findViewById(R.id.text);
-     textView.setText(""+new Date().getTime());
-    }*/
+        adapter = new BaseRecycleAdapter<String>(getActivity(),null,R.layout.main_list_item_list,true) {
+
+            @Override
+            protected void setPositionClick(int position, String bean) {
+
+                switch (position){
+                    case 0:
+                        Router.newIntent(getActivity()).to(ActivityOne.class).launch();
+                        break;
+                    case 1:
+                        Router.newIntent(getActivity()).to(ActivityTwo.class).launch();
+                        break;
+                }
+            }
+
+            @Override
+            protected void initData(MyViewHolder holder, int position, String bean) {
+
+                holder.setText(R.id.text,bean);
+            }
+        };
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void showList(List<String> strings) {
+        adapter.setList(strings);
+        adapter.notifyDataSetChanged();
+    }
 }

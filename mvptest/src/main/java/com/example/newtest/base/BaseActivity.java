@@ -22,6 +22,7 @@ import com.example.newtest.R;
 import com.example.newtest.common.ToolbarBgColor;
 import com.example.newtest.kit.Kits;
 import com.example.newtest.log.XLog;
+import com.example.newtest.permission.PermissionActivity;
 import com.example.newtest.request.OkHttpClientManager;
 
 import java.lang.reflect.ParameterizedType;
@@ -32,7 +33,7 @@ import java.util.List;
  * Created by Mark on 2018/4/7.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends PermissionActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,8 +132,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             tvRight.setTextColor(getResources().getColor(R.color.blue_theme_text_color));
         }
 
-        if (!TextUtils.isEmpty(title))
+        if (!TextUtils.isEmpty(title)){
+
             tvTitle.setText("" + title);
+        }
 //        tvBack.setTypeface(HpApplication.getInstance().getIconTypeFace());
 
         tvBack.setOnClickListener(new View.OnClickListener() {
@@ -159,9 +162,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     protected void showToolBar() {
-        if (toolbar != null)
+        if (toolbar != null){
             //  setViewVisible(toolbar);
             getSupportActionBar().show();
+        }
+
     }
 
     /**
@@ -183,18 +188,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setVisibilityGone(View view) {
-        if (view != null)
+        if (view != null){
+
             view.setVisibility(View.GONE);
+        }
     }
 
     protected void setVisibilityVisible(View view) {
-        if (view != null)
+        if (view != null){
+
             view.setVisibility(View.VISIBLE);
+        }
     }
 
     protected void setVisibilityInVisible(View view) {
-        if (view != null)
+        if (view != null){
+
             view.setVisibility(View.INVISIBLE);
+        }
     }
 
     protected void canceledRequests(){
@@ -235,9 +246,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                                            View titleViewGroup) {
         try {
-            if (activity == null)
+            if (activity == null){
 
                 return;
+            }
+
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -246,9 +259,11 @@ public abstract class BaseActivity extends AppCompatActivity {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.parseColor("#19000000"));
-                if (titleViewGroup == null)
+                if (titleViewGroup == null){
 
                     return;
+                }
+
 
                 // 设置头部控件ViewGroup的PaddingTop,防止界面与状态栏重叠
 

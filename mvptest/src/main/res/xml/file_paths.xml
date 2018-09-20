@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path path="Android/data/com/hpd/" name="files_root" />
+    <external-path path="." name="external_storage_root" />
+    <external-path path="a" name="camera_photos" />
+    <files-path path="b" name="photos" />
+</paths>

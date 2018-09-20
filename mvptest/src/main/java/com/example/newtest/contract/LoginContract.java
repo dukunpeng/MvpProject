@@ -27,6 +27,7 @@ public class LoginContract {
     public  interface View extends IBaseView {
         void showRecycleList();
         void showBanner();
+        void showData(Object data);
     }
 
     public interface Presenter extends IBasePresenter {
