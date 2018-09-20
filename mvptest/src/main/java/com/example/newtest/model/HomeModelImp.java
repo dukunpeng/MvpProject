@@ -24,7 +24,8 @@ public class HomeModelImp extends BaseModelImp implements HomeContract.Model {
     public List<String> getList() {
         List<String> list = new ArrayList<>();
         for (int i = 0; i <4 ; i++) {
-            switch (i){
+            list.add("第"+i+"条内存泄漏");
+           /* switch (i){
                 case 0:
                     list.add("系统可为APP分配的最大内存"+Runtime.getRuntime().maxMemory());
                     break;
@@ -35,7 +36,7 @@ public class HomeModelImp extends BaseModelImp implements HomeContract.Model {
                     break;
                 case 3:
                     break;
-            }
+            }*/
 
         }
         return list;

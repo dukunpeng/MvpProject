@@ -2,10 +2,13 @@ package com.example.newtest.apps;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.newtest.log.LogUtils;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.lang.ref.WeakReference;
 
@@ -28,7 +31,16 @@ public class MyApplication extends Application {
         super.onCreate();
         instance=this;
         initGlobeActivity();
+        refWatcher = LeakCanary.install(this);
     }
+    private RefWatcher refWatcher;
+
+
+    public static RefWatcher getRefWatcher(Context context) {
+        MyApplication application = (MyApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
     private void initGlobeActivity() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.newtest.ui;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
@@ -22,6 +23,7 @@ public class MainActivity extends MvpBaseActivity<MainActivityPresenterImp> impl
     private NavigationTabView navigationTabView;
 
 
+    public static Activity activity;
 
     /**
      * 设置页面资源

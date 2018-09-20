@@ -8,6 +8,9 @@ import com.example.newtest.adapter.base.BaseRecycleAdapter;
 import com.example.newtest.base.MvpBaseFragment;
 import com.example.newtest.contract.HomeContract;
 import com.example.newtest.presenter.HomePresenterImp;
+import com.example.newtest.router.Router;
+import com.example.newtest.ui.test.ActivityOne;
+import com.example.newtest.ui.test.ActivityTwo;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class HomeFragment extends MvpBaseFragment<HomePresenterImp> implements H
     public void loadData() {
 
         presenter.requestBanner();
+        presenter.getList();
     }
 
     @Override
@@ -41,6 +45,14 @@ public class HomeFragment extends MvpBaseFragment<HomePresenterImp> implements H
             @Override
             protected void setPositionClick(int position, String bean) {
 
+                switch (position){
+                    case 0:
+                        Router.newIntent(getActivity()).to(ActivityOne.class).launch();
+                        break;
+                    case 1:
+                        Router.newIntent(getActivity()).to(ActivityTwo.class).launch();
+                        break;
+                }
             }
 
             @Override
