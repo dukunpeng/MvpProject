@@ -181,6 +181,7 @@ public class LoginActivity extends MvpBaseActivity<LoginPresenterImp> implements
                 hideLoading();
                 canceledRequests();
                 Router.newIntent(LoginActivity.this).to(MainActivity.class).launch();
+                finish();
             }
         });
 
