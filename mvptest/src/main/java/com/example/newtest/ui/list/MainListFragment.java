@@ -57,6 +57,11 @@ public class MainListFragment extends MvpBaseFragment<MainListPresenterImp> impl
             }
         };
         recyclerView.setAdapter(adapter);
+        try{
+            Thread.sleep(1*1000);
+        }catch (Exception e){
+
+        }
     }
 
 

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.newtest.log.LogUtils;
+import com.example.newtest.test.AppBlockCanaryContext;
+import com.github.moduth.blockcanary.BlockCanary;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -26,12 +28,22 @@ public class MyApplication extends Application {
     public static MyApplication getInstance(){
         return instance;
     }
+    private WeakReference<Activity> activityWeakReference;
     @Override
     public void onCreate() {
         super.onCreate();
         instance=this;
         initGlobeActivity();
+
+        initLeakCanary();
+        initBlockCanary();
+    }
+    private void initLeakCanary(){
         refWatcher = LeakCanary.install(this);
+    }
+    private void initBlockCanary(){
+        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+
     }
     private RefWatcher refWatcher;
 
@@ -46,6 +58,7 @@ public class MyApplication extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 app_activity = activity;
+                activityWeakReference = new WeakReference<Activity>(app_activity);
                 LogUtils.e("onActivityCreated===", "activity=="+activity.getClass().getSimpleName());
                 LogUtils.e("onActivityCreated===",  "app_activity=="+app_activity.getClass().getSimpleName());
             }
@@ -56,12 +69,14 @@ public class MyApplication extends Application {
                 Log.e("onActivityDestroyed===",  "activity=="+activity.getClass().getSimpleName());
                 Log.e("onActivityDestroyed===",  "app_activity=="+app_activity.getClass().getSimpleName());
 
+
             }
 
             /** Unused implementation **/
             @Override
             public void onActivityStarted(Activity activity) {
                 app_activity = activity;
+                activityWeakReference = new WeakReference<Activity>(app_activity);
                 LogUtils.e("onActivityStarted===",  "activity=="+activity.getClass().getSimpleName());
                 LogUtils.e("onActivityStarted===",  "app_activity=="+app_activity.getClass().getSimpleName());
 
@@ -71,6 +86,7 @@ public class MyApplication extends Application {
             @Override
             public void onActivityResumed(Activity activity) {
                 app_activity = activity;
+                activityWeakReference = new WeakReference<Activity>(app_activity);
                 LogUtils.e("onActivityResumed===", "activity" + "activity=="+activity.getClass().getSimpleName());
                 LogUtils.e("onActivityResumed===",  "app_activity=="+app_activity.getClass().getSimpleName());
             }

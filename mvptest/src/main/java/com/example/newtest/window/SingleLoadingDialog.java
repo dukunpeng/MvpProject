@@ -15,6 +15,8 @@ import android.view.animation.AnimationUtils;
 import com.example.newtest.R;
 import com.example.newtest.apps.MyApplication;
 
+import java.lang.ref.WeakReference;
+
 /**
  *
  * @author Mark
@@ -26,6 +28,7 @@ public class SingleLoadingDialog extends Dialog implements ILoading
 {
 
     private volatile static SingleLoadingDialog instance;
+private WeakReference<Context> contextWeakReference;
 
     private AppCompatTextView textView;
     private AppCompatImageView imageView;
@@ -41,6 +44,7 @@ public class SingleLoadingDialog extends Dialog implements ILoading
 
     public SingleLoadingDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
+        contextWeakReference = new WeakReference<Context>(context);
     }
 
     /**
@@ -51,16 +55,18 @@ public class SingleLoadingDialog extends Dialog implements ILoading
         if (instance==null){
             synchronized (SingleLoadingDialog.class){
                 if (instance==null){
+
                     CreateDialog.invoke();
                 }else{
-                    if (!MyApplication.getInstance().getCurrentActivity().equals(instance.getImageView().getTag())){
+                    if (instance.contextWeakReference==null||!MyApplication.getInstance().getCurrentActivity().equals(instance.contextWeakReference.get())){
                         instance.dismiss();
                         CreateDialog.invoke();
                     }
                 }
             }
         }else{
-            if (!MyApplication.getInstance().getCurrentActivity().equals(instance.getImageView().getTag())){
+            if (instance.contextWeakReference==null||!MyApplication.getInstance().getCurrentActivity().equals(instance.contextWeakReference.get())){
+
                 instance.dismiss();
                 CreateDialog.invoke();
             }
@@ -119,7 +125,7 @@ public class SingleLoadingDialog extends Dialog implements ILoading
             instance = new SingleLoadingDialog(MyApplication.getInstance().getCurrentActivity(), R.style.dialog_fullscreen_tran);
             // instance.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
             instance.setContentView(LayoutInflater.from(MyApplication.getInstance().getApplicationContext()).inflate(R.layout.window_loading_dialog,null));
-            instance.getImageView().setTag(MyApplication.getInstance().getCurrentActivity());
+            instance.getImageView()/*.setTag(MyApplication.getInstance().getCurrentActivity())*/;
             instance.getTextView();
             instance.setCancelable(true);
             instance.setCanceledOnTouchOutside(false);
