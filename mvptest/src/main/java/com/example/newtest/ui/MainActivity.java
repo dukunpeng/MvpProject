@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.newtest.R;
-import com.example.newtest.base.MvpBaseActivity;
+import com.example.newtest.base.AbstractMvpBaseActivity;
 import com.example.newtest.contract.MainActivityContract;
 import com.example.newtest.ui.home.HomeFragment;
 import com.example.newtest.ui.list.MainListFragment;
@@ -19,7 +19,7 @@ import com.example.newtest.wedigt.NavigationTabView;
  * Created by Mark on 2018/7/12.
  */
 
-public class MainActivity extends MvpBaseActivity<MainActivityPresenterImp> implements MainActivityContract.View {
+public class MainActivity extends AbstractMvpBaseActivity<MainActivityPresenterImp> implements MainActivityContract.View {
     private NavigationTabView navigationTabView;
 
 

@@ -19,7 +19,7 @@ import java.lang.reflect.ParameterizedType;
  * Created by Mark on 2018/7/10.
  */
 
-public abstract class BaseFragment extends Fragment  {
+public abstract class AbstractBaseFragment extends Fragment  {
     protected View rootView;
 
     @Override

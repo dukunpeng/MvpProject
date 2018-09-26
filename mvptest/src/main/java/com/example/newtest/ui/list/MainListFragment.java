@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.newtest.R;
 import com.example.newtest.adapter.base.BaseRecycleAdapter;
-import com.example.newtest.base.BaseFragment;
-import com.example.newtest.base.MvpBaseFragment;
+import com.example.newtest.base.AbstractMvpBaseFragment;
 import com.example.newtest.bean.UserData;
 import com.example.newtest.contract.MainListContract;
 import com.example.newtest.presenter.MainListPresenterImp;
-import com.example.newtest.window.SingleLoadingDialog;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +20,7 @@ import java.util.List;
  * @Describe
  */
 
-public class MainListFragment extends MvpBaseFragment<MainListPresenterImp> implements MainListContract.View{
+public class MainListFragment extends AbstractMvpBaseFragment<MainListPresenterImp> implements MainListContract.View{
 
     private RecyclerView recyclerView;
 

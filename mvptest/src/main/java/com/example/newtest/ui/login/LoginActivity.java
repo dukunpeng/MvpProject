@@ -13,13 +13,12 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.newtest.R;
-import com.example.newtest.base.MvpBaseActivity;
+import com.example.newtest.base.AbstractMvpBaseActivity;
 import com.example.newtest.common.APPClientParam;
 import com.example.newtest.contract.LoginContract;
 import com.example.newtest.kit.Codec;
@@ -33,7 +32,7 @@ import com.google.gson.Gson;
  * Created by Mark on 2018/4/9.
  */
 
-public class LoginActivity extends MvpBaseActivity<LoginPresenterImp> implements LoginContract.View{
+public class LoginActivity extends AbstractMvpBaseActivity<LoginPresenterImp> implements LoginContract.View{
 
     private TextView tvTest1,tvTest2,tv1,tv2,tv3;
     private LoadingAbleLayout loadingAbleLayout;

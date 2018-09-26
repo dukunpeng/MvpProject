@@ -1,40 +1,15 @@
 package com.example.newtest.model;
 
-import android.database.Observable;
-import android.widget.Toast;
-
-import com.example.newtest.base.BaseModel;
-import com.example.newtest.base.BaseModelImp;
-import com.example.newtest.base.IBaseModel;
+import com.example.newtest.base.AbstractBaseModelImp;
 import com.example.newtest.bean.LoginInfo;
 import com.example.newtest.bean.UserData;
 import com.example.newtest.common.APPClientParam;
-import com.example.newtest.common.Config;
 import com.example.newtest.common.HttpConfig;
 import com.example.newtest.contract.LoginContract;
-import com.example.newtest.kit.Kits;
-import com.example.newtest.log.XLog;
 import com.example.newtest.request.OkHttpClientManager;
 import com.example.newtest.tyjk.ApmToJsonUtil;
-import com.example.newtest.tyjk.Builder;
-import com.example.newtest.tyjk.Director;
 import com.example.newtest.tyjk.TYBaseBean;
-import com.example.newtest.tyjk.UploadBeanBuilder;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.ConnectionPool;
-import okhttp3.Dispatcher;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -44,7 +19,7 @@ import rx.schedulers.Schedulers;
  * Created by Mark on 2018/4/7.
  */
 
-public class LoginModelImp extends BaseModelImp implements LoginContract.Model {
+public class LoginModelImp extends AbstractBaseModelImp implements LoginContract.Model {
 
     @Override
     public void doLogin(APPClientParam apm, final OkHttpClientManager.ResultCallback<LoginInfo> callback) {

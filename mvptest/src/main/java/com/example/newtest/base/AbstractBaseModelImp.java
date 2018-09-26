@@ -36,7 +36,7 @@ import rx.schedulers.Schedulers;
  * Created by Mark on 2018/7/11.
  */
 
-public abstract class BaseModelImp implements IBaseModelImp
+public abstract class AbstractBaseModelImp implements IBaseModelImp
 {
     /**
      * 传统方式请求网络
@@ -73,7 +73,7 @@ public abstract class BaseModelImp implements IBaseModelImp
     @Override
     public <T> void  doRequest(APPClientParam apm, String method ,final OkHttpClientManager.ResultCallback<T> callback){
         if (!MyApplication.isNetAvailable){
-            LogUtils.e("BaseModelImp","net is unavilable");
+            LogUtils.e("AbstractBaseModelImp","net is unavilable");
             return;
         }
         callback.onStart();
@@ -124,7 +124,7 @@ public abstract class BaseModelImp implements IBaseModelImp
         IBaseApiService iBaseApiService = RetrofitUtil.getRetrofit().create(IBaseApiService.class);
         Call call = iBaseApiService.getDataCall(json);
         if (!MyApplication.isNetAvailable){
-            LogUtils.e("BaseModelImp","net is unavilable");
+            LogUtils.e("AbstractBaseModelImp","net is unavilable");
             return call ;
         }
         call.enqueue(new Callback<TYBaseBean>() {

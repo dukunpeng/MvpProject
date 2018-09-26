@@ -33,7 +33,7 @@ import java.util.List;
  * Created by Mark on 2018/4/7.
  */
 
-public abstract class BaseActivity extends PermissionActivity {
+public abstract class AbstratBaseActivity extends PermissionActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

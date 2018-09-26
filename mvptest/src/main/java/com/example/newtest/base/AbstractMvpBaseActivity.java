@@ -1,13 +1,7 @@
 package com.example.newtest.base;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.newtest.kit.Kits;
 import com.example.newtest.log.XLog;
@@ -16,16 +10,21 @@ import com.example.newtest.window.SingleLoadingDialog;
 import java.lang.reflect.ParameterizedType;
 
 /**
- * Created by Mark on 2018/7/10.
+ * Created by Mark on 2018/4/7.
  */
 
-public abstract class MvpBaseFragment<P extends BasePresenter>  extends BaseFragment implements IBaseView {
+public abstract class AbstractMvpBaseActivity<P extends BasePresenter> extends AbstratBaseActivity implements IBaseView {
+
+
     protected P presenter;
-    @Nullable
+
+
+
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         initMvp();
-        return super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreate(savedInstanceState);
     }
 
     /**
@@ -40,7 +39,7 @@ public abstract class MvpBaseFragment<P extends BasePresenter>  extends BaseFrag
             //attach View
             presenter.attachWindow(this);
         } else {
-            XLog.e("fragment:"+this.getClass().getName()+"没有实现IBaseView");
+            XLog.e("activity:"+this.getClass().getName()+"没有实现IBaseView");
             throw new RuntimeException(this.getClass().getName()+"没有实现IBaseView");
         }
     }
@@ -50,10 +49,11 @@ public abstract class MvpBaseFragment<P extends BasePresenter>  extends BaseFrag
      * @return
      */
     P createNewPresenter() {
-        Class <P> entityClass = (Class <P>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        ParameterizedType pt = (ParameterizedType) getClass().getGenericSuperclass();
+        Class <P> entityClass = (Class <P>) pt.getActualTypeArguments()[0];
+
         return Kits.Reflect.createInstance(entityClass);
     }
-
     @Override
     public void showError() {
 
@@ -70,10 +70,12 @@ public abstract class MvpBaseFragment<P extends BasePresenter>  extends BaseFrag
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
+        canceledRequests();
         if (presenter != null) {
             presenter.detachWindow();
         }
     }
+
 }

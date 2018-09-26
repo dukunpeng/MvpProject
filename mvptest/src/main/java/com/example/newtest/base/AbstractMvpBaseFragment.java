@@ -1,50 +1,29 @@
 package com.example.newtest.base;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
-import com.example.newtest.R;
-import com.example.newtest.common.ToolbarBgColor;
 import com.example.newtest.kit.Kits;
 import com.example.newtest.log.XLog;
-import com.example.newtest.request.OkHttpClientManager;
 import com.example.newtest.window.SingleLoadingDialog;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by Mark on 2018/4/7.
+ * Created by Mark on 2018/7/10.
  */
 
-public abstract class MvpBaseActivity<P extends BasePresenter> extends BaseActivity implements IBaseView {
-
-
+public abstract class AbstractMvpBaseFragment<P extends BasePresenter>  extends AbstractBaseFragment implements IBaseView {
     protected P presenter;
-
-
-
-
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         initMvp();
-        super.onCreate(savedInstanceState);
+        return super.onCreateView(inflater,container,savedInstanceState);
     }
 
     /**
@@ -59,7 +38,7 @@ public abstract class MvpBaseActivity<P extends BasePresenter> extends BaseActiv
             //attach View
             presenter.attachWindow(this);
         } else {
-            XLog.e("activity:"+this.getClass().getName()+"没有实现IBaseView");
+            XLog.e("fragment:"+this.getClass().getName()+"没有实现IBaseView");
             throw new RuntimeException(this.getClass().getName()+"没有实现IBaseView");
         }
     }
@@ -69,11 +48,10 @@ public abstract class MvpBaseActivity<P extends BasePresenter> extends BaseActiv
      * @return
      */
     P createNewPresenter() {
-        ParameterizedType pt = (ParameterizedType) getClass().getGenericSuperclass();
-        Class <P> entityClass = (Class <P>) pt.getActualTypeArguments()[0];
-
+        Class <P> entityClass = (Class <P>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         return Kits.Reflect.createInstance(entityClass);
     }
+
     @Override
     public void showError() {
 
@@ -90,12 +68,10 @@ public abstract class MvpBaseActivity<P extends BasePresenter> extends BaseActiv
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
-        canceledRequests();
         if (presenter != null) {
             presenter.detachWindow();
         }
     }
-
 }

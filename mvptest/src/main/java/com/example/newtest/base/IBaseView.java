@@ -8,8 +8,6 @@ import android.content.Context;
 
 public interface IBaseView {
 
-
-
     void showLoading();
     void hideLoading();
     void showError();

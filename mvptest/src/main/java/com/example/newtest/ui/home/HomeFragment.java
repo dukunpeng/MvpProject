@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.newtest.R;
 import com.example.newtest.adapter.base.BaseRecycleAdapter;
-import com.example.newtest.base.MvpBaseFragment;
+import com.example.newtest.base.AbstractMvpBaseFragment;
 import com.example.newtest.contract.HomeContract;
 import com.example.newtest.presenter.HomePresenterImp;
 import com.example.newtest.router.Router;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Mark on 2018/7/13.
  */
 
-public class HomeFragment extends MvpBaseFragment<HomePresenterImp> implements HomeContract.View {
+public class HomeFragment extends AbstractMvpBaseFragment<HomePresenterImp> implements HomeContract.View {
     private RecyclerView recyclerView;
 
 
