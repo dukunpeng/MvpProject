@@ -22,7 +22,7 @@ public class HomeModelImp extends AbstractBaseModelImp implements HomeContract.M
     @Override
     public List<String> getList() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i <800000 ; i++) {
+        for (int i = 0; i <80 ; i++) {
             list.add("第"+i+"条内存泄漏");
            /* switch (i){
                 case 0:

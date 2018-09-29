@@ -26,6 +26,7 @@ import java.lang.ref.WeakReference;
 
 public class SingleLoadingDialog extends Dialog implements ILoading
 {
+    //TODO 这里需要重新设计下，因为这样子还是会内存泄漏
 
     private volatile static SingleLoadingDialog instance;
 private WeakReference<Context> contextWeakReference;

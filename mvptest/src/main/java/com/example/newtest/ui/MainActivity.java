@@ -8,6 +8,7 @@ import com.example.newtest.R;
 import com.example.newtest.base.AbstractMvpBaseActivity;
 import com.example.newtest.contract.MainActivityContract;
 import com.example.newtest.ui.home.HomeFragment;
+import com.example.newtest.ui.learn.LearnFragment;
 import com.example.newtest.ui.list.MainListFragment;
 import com.example.newtest.net.HomePageObserver;
 import com.example.newtest.net.NetWorkObservable;
@@ -64,10 +65,10 @@ public class MainActivity extends AbstractMvpBaseActivity<MainActivityPresenterI
                             .selected(false)
                             .setDescription("列表")
                             .setDrawableSelectorRes(R.drawable.home_menu_selector))
-                    .add(HomeFragment.class.newInstance(), new NavigationItemView(getActivity())
+                    .add(LearnFragment.class.newInstance(), new NavigationItemView(getActivity())
                             .setDotViewShow(false)
                             .selected(false)
-                            .setDescription("3页")
+                            .setDescription("学习")
                             .setDrawableSelectorRes(R.drawable.home_menu_selector))
                     .add(HomeFragment.class.newInstance(), new NavigationItemView(getActivity())
                             .setDotViewShow(false)

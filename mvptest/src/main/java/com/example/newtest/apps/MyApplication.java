@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.newtest.log.LogUtils;
+import com.example.newtest.log.XLog;
 import com.example.newtest.test.AppBlockCanaryContext;
+import com.facebook.stetho.Stetho;
 import com.github.moduth.blockcanary.BlockCanary;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tencent.mmkv.MMKV;
 
 import java.lang.ref.WeakReference;
 
@@ -33,10 +36,17 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance=this;
+        initMmkv();
         initGlobeActivity();
 
         initLeakCanary();
         initBlockCanary();
+        Stetho.initializeWithDefaults(this);
+    }
+    private void initMmkv(){
+        String rootDir = MMKV.initialize(this);
+        System.out.println("mmkv root: " + rootDir);
+        XLog.e("mmkv root: " + rootDir);
     }
     private void initLeakCanary(){
         refWatcher = LeakCanary.install(this);

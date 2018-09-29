@@ -10,10 +10,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/appTest" />
             <option value="$PROJECT_DIR$/autonet" />
+            <option value="$PROJECT_DIR$/mainapp" />
             <option value="$PROJECT_DIR$/mvptest" />
+            <option value="$PROJECT_DIR$/pluginpartapp" />
             <option value="$PROJECT_DIR$/request" />
+            <option value="$PROJECT_DIR$/standard" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
